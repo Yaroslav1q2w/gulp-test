@@ -26,7 +26,7 @@ gulp.task("scripts", () => {
 	return gulp
 		.src("./src/js/script.js")
 		.pipe(uglify.default())
-		.pipe(gulp.dest("dist/script/"))
+		.pipe(gulp.dest("dist/js/"))
 		.pipe(browserSync.stream());
 });
 
@@ -76,6 +76,7 @@ gulp.task("sprite", () => {
 				mode: {
 					symbol: {
 						sprite: "../sprite.svg",
+						example: true,
 					},
 				},
 			})
@@ -102,4 +103,4 @@ gulp.task(
 	"build",
 	gulp.series("clean", "scripts", "style", "images", "index", "fonts", "sprite")
 );
-gulp.task("dev", gulp.series("build", gulp.parallel("watch")));
+gulp.task("dev", gulp.series("build", gulp.parallel("watch", "server")));
